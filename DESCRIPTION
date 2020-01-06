@@ -1,0 +1,30 @@
+Package: vakdr
+Type: Package
+Title: Miscellanious helper functions
+Version: 0.1.0
+Author: Vitaly Druker <vitaly@westendstats.com>
+Maintainer: Vitaly Druker <vitaly@westendstats.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: dplyr,
+    formula.tools,
+    glmnet,
+    broom,
+    ggplot2,
+    Rcpp,
+    tibble,
+    Hmisc,
+    glue,
+    cronR,
+    qcc
+Suggests: glmnetUtils,
+    knitr,
+    rmarkdown,
+    broom,
+    testthat
+RoxygenNote: 7.0.2
+VignetteBuilder: knitr
+LinkingTo: Rcpp
