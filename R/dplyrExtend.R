@@ -53,4 +53,3 @@ rollup <- function(.data, ..., label = "Total"){
     total_row
   )
 }
-

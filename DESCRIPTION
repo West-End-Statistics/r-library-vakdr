@@ -19,12 +19,14 @@ Imports: dplyr,
     Hmisc,
     glue,
     cronR,
-    qcc
+    qcc,
+    xlsx
 Suggests: glmnetUtils,
     knitr,
     rmarkdown,
     broom,
-    testthat
+    testthat,
+    devtools
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 LinkingTo: Rcpp
