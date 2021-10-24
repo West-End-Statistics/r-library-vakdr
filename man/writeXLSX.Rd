@@ -22,15 +22,14 @@ writeXLSX(
 
 \item{sheetName}{the sheet name to write the data frame to}
 
-\item{col.names}{a logical value indicating if the column names of
-    \code{x} are to be written along with \code{x} to the file.}
+\item{col.names}{a logical value indicating if the column names of \code{x}
+are to be written along with \code{x} to the file.}
 
-\item{row.names}{a logical value indicating whether the row names of 
-    \code{x} are to be written along with \code{x} to the file.}
+\item{row.names}{a logical value indicating whether the row names of
+\code{x} are to be written along with \code{x} to the file.}
 
 \item{showNA}{a boolean value to control how NA's are displayed on the
-    sheet.  If \code{FALSE}, NA values will be represented as blank
-    cells.}
+sheet.  If \code{FALSE}, NA values will be represented as blank cells.}
 
 \item{addFilter}{should an auto filter be added to each column heading?}
 
