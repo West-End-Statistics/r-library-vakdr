@@ -1,7 +1,7 @@
 Package: vakdr
 Type: Package
 Title: Miscellanious helper functions
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Author: Vitaly Druker <vitaly@westendstats.com>
 Maintainer: Vitaly Druker <vitaly@westendstats.com>
 Description: More about what it does (maybe more than one line)
@@ -27,7 +27,6 @@ Imports:
 Suggests: 
     glmnetUtils,
     knitr,
-    rmarkdown,
     broom,
     testthat,
     devtools,
@@ -35,7 +34,9 @@ Suggests:
     modelr,
     plotly,
     webshot,
-    htmlwidgets
+    htmlwidgets,
+    rmarkdown
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 LinkingTo: Rcpp
+
