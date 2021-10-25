@@ -23,7 +23,8 @@ Imports:
     qcc,
     xlsx,
     lubridate,
-    R6
+    R6,
+    assertthat
 Suggests: 
     glmnetUtils,
     knitr,
@@ -39,4 +40,3 @@ Suggests:
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 LinkingTo: Rcpp
-
