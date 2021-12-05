@@ -1,0 +1,19 @@
+---
+title: "Template Title"
+author: "Your Name"
+date: "`r vakdr::pretty_date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(ggplot2)
+
+theme_set(vakdr::theme_vakdr())
+options("dplyr.summarise.inform" = FALSE)
+```
+
+
+

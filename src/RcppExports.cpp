@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // windowThreshold
 LogicalVector windowThreshold(NumericVector meas_col, NumericVector meas_norm, NumericVector time_col, double look_backward, double look_forward);
 RcppExport SEXP _vakdr_windowThreshold(SEXP meas_colSEXP, SEXP meas_normSEXP, SEXP time_colSEXP, SEXP look_backwardSEXP, SEXP look_forwardSEXP) {

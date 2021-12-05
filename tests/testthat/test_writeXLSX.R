@@ -18,6 +18,7 @@ test_that("writeXLSX is able to create a file", {
 
 
 test_that("writeXLSX works from a cron job",{
+  skip("don't check cron anymore")
   skip_if(Sys.which('crontab')=="", message = "crontab not installed on system")
   tmp_file_R <- tempfile(fileext = ".R")
 
@@ -30,11 +31,10 @@ test_that("writeXLSX works from a cron job",{
   writeLines(script, con = tmp_file_R)
 
 
+  skip_if_not_installed("cronR")
   library(cronR)
-
-
-  cron_add(cron_rscript(tmp_file_R), frequency = 'minutely', id = "test_job")
-
+  cron_add(cron_rscript(tmp_file_R), frequency = 'minutely', id = "test_job",
+           ask = FALSE)
   max_wait <- 60
 
   start <- Sys.time()

@@ -19,3 +19,34 @@ personAge <- function(from, to) {
            (to_lt$mon == from_lt$mon & to_lt$mday < from_lt$mday),
          age - 1, age)
 }
+
+#' Create a full date with an ordinal date
+#'
+#' This function is useful for formatting dates in reports - especially in the
+#' header of an Rmarkdown report. Default behavior uses today's date. See
+#' \code{\link{strptime}} for details on month and year code strings.
+#'
+#' @param x a date object to convert to a string
+#' @param month_code the code used to format the month - defaults to full month
+#'   name
+#' @param year_code the code used to format the year - defaults to full 4 digit
+#'   year
+#'
+#' @return a length 1 character vector
+#' @export
+#'
+#' @examples
+#' # returns nice format for today's date
+#' pretty_date()
+#'
+#' pretty_date(as.Date('2020-03-01'))
+#' # March 1st, 2020
+pretty_date <- function(x = Sys.Date(), month_code = "%B", year_code = "%Y") {
+  stopifnot(inherits(x, "Date"))
+
+  date_ordinal <- scales::ordinal(as.numeric(format(x, '%d')))
+  year_full <- format(x, year_code)
+  month_full <- format(x, month_code)
+
+  paste0(month_full, " ", date_ordinal, ", ", year_full)
+}
