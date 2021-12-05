@@ -43,6 +43,5 @@ lkp_to_factor <- function(x, lkp_vals, ..., check_names = TRUE){
     check_set(x, key_vals, msg = paste0("Issue with input: ", deparse(substitute(x))))
   }
 
-
   factor(x, levels = key_vals, labels = lkp_vals, ...)
 }
