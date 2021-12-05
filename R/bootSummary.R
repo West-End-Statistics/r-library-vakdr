@@ -1,6 +1,6 @@
 #' \code{bootSummary} calculates the empirical distribution of a statistic.
 #'
-#' The \code{bootSummary} function uses bootstaps to estimate the midpoint, avg
+#' The \code{bootSummary} function uses bootstraps to estimate the midpoint, avg
 #' and confidence interval of a user defined function. It's purpose is to work
 #' seamlessly within the \pkg{dplyr} framework/the pipe an allows the use of
 #' bare column names.
@@ -10,7 +10,7 @@
 #'
 #' The example shows how a t-test performs similarly to a bootstrap when the
 #' data is normal (Group A). It's also possible to make estimates for other
-#' statistitics such as the median.
+#' statistics such as the median.
 #'
 #' @inheritParams modelr::bootstrap
 #' @param data data.frame or tibble.
@@ -19,7 +19,7 @@
 #'   the usage of \code{\link[dplyr]{funs}}.
 #' @param ... grouping variables for summary statistic.
 #' @param ci width of quantile interval for final summary.
-#' @param na.rm should the final summarization across bootraps remove
+#' @param na.rm should the final calculation across bootstraps remove
 #'   \code{NAs}?
 #'
 #' @return a tibble containing the name of the grouping variables and the
@@ -52,6 +52,9 @@
 #' test_data %>% bootSummary(stat, cohort)
 bootSummary <- function(data, var, ..., .funs = median,
                         n = 100, ci = .95, na.rm = FALSE){
+
+  check_package('modelr')
+
   quant_low <- (1-ci)/2
   quant_high <- (1-quant_low)
 
@@ -60,21 +63,21 @@ bootSummary <- function(data, var, ..., .funs = median,
 
   bs_df <- data %>%
     # select only the columns needed to minimize the resources needed for the bootstrap/as.data.frame function
-    select_at(vars(!!col_var, !!!grouping_var)) %>%
+    dplyr::select_at(vars(!!col_var, !!!grouping_var)) %>%
     modelr::bootstrap(n) %>%
-    mutate(stat_summary = purrr::map(strap, function(x){
+    dplyr::mutate(stat_summary = purrr::map(strap, function(x){
       x %>%
         as.data.frame() %>%
-        group_by(!!!grouping_var) %>%
-        summarise_at(.vars = vars(!!col_var),
+        dplyr::group_by(!!!grouping_var) %>%
+        dplyr::summarise_at(.vars = vars(!!col_var),
                      .funs = .funs)
     })) %>%
-    select(.id, stat_summary) %>%
+    dplyr::select(.id, stat_summary) %>%
     tidyr::unnest(cols = c(stat_summary))
 
   bs_df %>%
-    group_by(!!!grouping_var) %>%
-    summarise(
+    dplyr::group_by(!!!grouping_var) %>%
+    dplyr::summarise(
       stat_mean = mean(!!col_var, na.rm = na.rm),
       stat_mid = quantile(!!col_var, .5,na.rm = na.rm),
       stat_low = quantile(!!col_var, quant_low, na.rm = na.rm),
@@ -82,8 +85,3 @@ bootSummary <- function(data, var, ..., .funs = median,
     )
 
 }
-
-
-
-
-

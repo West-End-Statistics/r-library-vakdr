@@ -20,7 +20,7 @@ the usage of \code{\link[dplyr]{funs}}.}
 
 \item{ci}{width of quantile interval for final summary.}
 
-\item{na.rm}{should the final summarization across bootraps remove
+\item{na.rm}{should the final calculation across bootstraps remove
 \code{NAs}?}
 }
 \value{
@@ -34,7 +34,7 @@ a tibble containing the name of the grouping variables and the
  }
 }
 \description{
-The \code{bootSummary} function uses bootstaps to estimate the midpoint, avg
+The \code{bootSummary} function uses bootstraps to estimate the midpoint, avg
 and confidence interval of a user defined function. It's purpose is to work
 seamlessly within the \pkg{dplyr} framework/the pipe an allows the use of
 bare column names.
@@ -45,7 +45,7 @@ function.
 
 The example shows how a t-test performs similarly to a bootstrap when the
 data is normal (Group A). It's also possible to make estimates for other
-statistitics such as the median.
+statistics such as the median.
 }
 \examples{
 library(dplyr)

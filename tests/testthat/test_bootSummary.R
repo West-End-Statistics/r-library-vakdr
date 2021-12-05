@@ -1,6 +1,4 @@
-context("test bootSummary")
 test_that("bootSummary is working",{
-  suppressWarnings(library(dplyr))
   set.seed(2)
 
   ungrouped_df <- bootSummary(mtcars, wt)
