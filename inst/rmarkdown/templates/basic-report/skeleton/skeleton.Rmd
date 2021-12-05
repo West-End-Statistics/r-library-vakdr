@@ -1,7 +1,7 @@
 ---
 title: "Template Title"
 author: "Your Name"
-date: "`r vakdr::pretty_date()"
+date: "`r vakdr::pretty_date()`"
 output: pdf_document
 ---
 
