@@ -94,8 +94,8 @@ allowing the use of formulas and grouping variables.
 
   This method leverages the \code{\link[Hmisc]{binconf}} function to
   calculate the confidence interval around the observed proportion of events.
-  This is the default method and benifits from returning reasonable returns
-  when there are no events. Specifically, there are no events in a group, the
+  This is the default method and benefits from returning reasonable returns
+  when there are no events. Specifically, if there are no events in a group, the
   point estimate of the o/e is always 0. However, the high estimate of the
   o/e should be related to the number of cases in the group. For example, we
   are more confident that the actual o/e is  closer to 0 if there are 100
@@ -106,7 +106,7 @@ allowing the use of formulas and grouping variables.
 
   This is a commonly used method for calculating the confidence interval. It
   works by assuming the total number of observations come from a poisson
-  distribuion and calculates the interval based on that. However, this method
+  distribution and calculates the interval based on that. However, this method
   does not take the number of cases into account. Specifically, the CI around
   10 events is the same whether it came from 100 or 1,000 cases.
 }

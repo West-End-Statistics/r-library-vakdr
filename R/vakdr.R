@@ -6,6 +6,7 @@
 #' @name vakdr
 #' @useDynLib vakdr
 #' @importFrom Rcpp sourceCpp
+#' @importFrom dplyr `%>%`
 #' @import dplyr
 #' @import purrr
 NULL

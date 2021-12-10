@@ -8,8 +8,8 @@
 #' @section \code{binconf}:
 #'   This method leverages the \code{\link[Hmisc]{binconf}} function to
 #'   calculate the confidence interval around the observed proportion of events.
-#'   This is the default method and benifits from returning reasonable returns
-#'   when there are no events. Specifically, there are no events in a group, the
+#'   This is the default method and benefits from returning reasonable returns
+#'   when there are no events. Specifically, if there are no events in a group, the
 #'   point estimate of the o/e is always 0. However, the high estimate of the
 #'   o/e should be related to the number of cases in the group. For example, we
 #'   are more confident that the actual o/e is  closer to 0 if there are 100
@@ -17,7 +17,7 @@
 #' @section  \code{poisson}:
 #'   This is a commonly used method for calculating the confidence interval. It
 #'   works by assuming the total number of observations come from a poisson
-#'   distribuion and calculates the interval based on that. However, this method
+#'   distribution and calculates the interval based on that. However, this method
 #'   does not take the number of cases into account. Specifically, the CI around
 #'   10 events is the same whether it came from 100 or 1,000 cases.
 #' @section \code{bootstrap}:
@@ -103,19 +103,19 @@ calcOE.formula <- function(formula, data,
   method <- match.arg(method)
 
   # check if groups need to be created
-  eval_groups <- quos(...)
+  eval_groups <- rlang::quos(...)
 
   if(length(eval_groups) != 0){
     # use purrr/map to create groups for output
     out <- data %>%
-      group_by(!!!eval_groups) %>%
+      dplyr::group_by(!!!eval_groups) %>%
       tidyr::nest() %>%
-      mutate(calc_o_e = purrr::map(data, ~ calcOE(formula, data = ., prob = prob,
+      dplyr::mutate(calc_o_e = purrr::map(data, ~ calcOE(formula, data = ., prob = prob,
                                                   prefix = prefix,
                                                   df = TRUE,
                                                   method = method,
                                                   num_boot = num_boot))) %>%
-      select(-data) %>%
+      dplyr::select(-data) %>%
       tidyr::unnest(calc_o_e)
     return(out)
   }
@@ -184,6 +184,7 @@ calcOE.numeric <- function(o_vect,
   }
 
   if(method == "binconf"){
+    check_package('Hmisc', msg = "Needed for calculating binomial confidence interval")
     bin_conf_est <- Hmisc::binconf(o, n, alpha = 1-prob)*n
     low_o <- bin_conf_est[2]
     high_o <- bin_conf_est[3]

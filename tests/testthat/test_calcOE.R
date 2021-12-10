@@ -1,9 +1,8 @@
 if(interactive()){
   library(testthat)
+  `%>%` <- dplyr::`%>%`
   devtools::load_all()
-  library(dplyr)
 }
-context("Test the calcOE function")
 
 set.seed(20181113)
 df_size <- 100
@@ -57,5 +56,4 @@ test_that("Works with 1 case",{
     ungroup() %>%
     filter(complete.cases(.)) %>%
     nrow(), 2)
-
 })
