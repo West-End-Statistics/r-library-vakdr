@@ -22,8 +22,8 @@ check_package <- function(pkg_name,
   if (!requireNamespace(pkg_name, quietly = TRUE)) {
     stop(
       glue::glue(
-        msg,
-        "The `{pkg_name}` package is missing. Please install with:",
+        "The `{pkg_name}` package is missing. {msg}",
+        "Please install with:",
         "    {install_directions}",
         .sep = "\n"
       ),
