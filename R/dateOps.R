@@ -1,5 +1,7 @@
 #' Calculate age based on start and stop dates
 #'
+#' This function makes sure that a person only becomes older on their birthdate.
+#'
 #' @param from birthdate
 #' @param to given date
 #'
@@ -7,7 +9,8 @@
 #' @export
 #'
 #' @examples
-#' # stay tuned
+#' birth_date <- as.Date('1978-02-22')
+#' personAge(birth_date, '2021-02-22') #43
 #'
 personAge <- function(from, to) {
   from_lt = as.POSIXlt(from)
