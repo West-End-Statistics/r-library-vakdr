@@ -21,8 +21,8 @@ The value can be:
 \item A data frame, to add multiple columns from a single expression.
 }}
 
-\item{label}{what should the total row be labeled as? Only valid if the
-first grouping variables is a factor or character.}
+\item{label}{what should the total row be labeled as? This is applied to all
+grouping variables that are characters or factors.}
 }
 \value{
 An object of the same class as .data. One grouping level will be
@@ -32,7 +32,7 @@ An object of the same class as .data. One grouping level will be
 This function is inteded to extend the `summarise` function in dplyr by
 binding (using `bind_row`) a "Total" row to the dataframe. This is especially
 useful when generating reports that require a summary line. It also
-appropriatly scales everything to make sure that aggregate functions such as
+appropriately scales everything to make sure that aggregate functions such as
 `mean` are taken on the raw data and not the aggregate data.
 }
 \examples{
