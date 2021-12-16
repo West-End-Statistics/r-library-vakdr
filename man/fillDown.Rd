@@ -9,8 +9,8 @@ fillDown(meas_col, time_col, carry_forward = lubridate::hours(6))
 \arguments{
 \item{meas_col}{column to carry forward}
 
-\item{time_col}{column that defines what "time" a measurment is taken. Can be
-any data type that supports numeric operations.}
+\item{time_col}{column that defines what "time" a measurement is taken. Can be
+any data type that supports numeric operations. This column must be ordered ascending.}
 
 \item{carry_forward}{how long to carry a measurement forward for. Must be the
 same type as `time_col`}
@@ -21,7 +21,7 @@ vector type same as meas_col
 \description{
 For example, if you have a lab measurement and want it to be valid for the
 next 6 hours this function can be used to set the next 6 hours if no other
-measurment has been made. Only NA's are filled in.
+measurement has been made. Only NA's are filled in.
 }
 \examples{
 library(dplyr)
