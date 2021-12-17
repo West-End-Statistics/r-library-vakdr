@@ -19,9 +19,9 @@ a named character vector
 \description{
 maskData maps the current values in a column (such as names) and maps them to
 either 1 or 2 levels. This is useful for quickly changing surgeon names in a
-report so that the surgeon identity is protected. The orignal values are set
-to the names of the newly created character vector. This function can map up
-to 26^2 (676) values.
+report so that the surgeon identity is protected. The original values are set
+to the names of the newly created character vector. When there are less than
+26^4 values then LETTERS are used but otherwise a numeric index is applied.
 }
 \examples{
 test_df <- data.frame(original = sample(paste0("SURG",1:total_surgeons),30,

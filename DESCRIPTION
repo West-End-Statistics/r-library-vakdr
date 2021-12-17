@@ -23,7 +23,8 @@ Imports:
     xlsx,
     lubridate,
     R6,
-    assertthat
+    assertthat,
+    purrr
 Suggests: 
     glmnetUtils,
     knitr,

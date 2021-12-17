@@ -2,9 +2,9 @@
 #'
 #' maskData maps the current values in a column (such as names) and maps them to
 #' either 1 or 2 levels. This is useful for quickly changing surgeon names in a
-#' report so that the surgeon identity is protected. The orignal values are set
-#' to the names of the newly created character vector. This function can map up
-#' to 26^2 (676) values.
+#' report so that the surgeon identity is protected. The original values are set
+#' to the names of the newly created character vector. When there are less than
+#' 26^4 values then LETTERS are used but otherwise a numeric index is applied.
 #'
 #' @param x column vector of data to mask
 #' @param header character string to preappend to each value
@@ -24,12 +24,13 @@ maskData <- function(x, header = "", randomize = TRUE){
   unique_x <- unique(x)
   len_un_x <- length(unique_x)
 
-  if(len_un_x <= 26){
-    newvals <- LETTERS
-  }else if(len_un_x > 26 & len_un_x <= 26^2){
-    newvals <- as.vector(outer(LETTERS, LETTERS, paste0))
-  }else{
-    stop("maskData cannot uniquely define >", 26^2, " unique values.")
+
+  required_num <- ceiling(log(len_un_x)/log(26))
+  if(required_num < 5) {
+      newvals <- purrr::reduce(rep(list(LETTERS), required_num),
+                    ~as.vector(outer(.x, .y, FUN = "paste0")))
+  } else {
+    newvals <- as.character(1:len_un_x)
   }
 
   selecter <- 1:len_un_x
@@ -43,3 +44,4 @@ maskData <- function(x, header = "", randomize = TRUE){
 
  out
 }
+
