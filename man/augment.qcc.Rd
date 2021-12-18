@@ -4,7 +4,7 @@
 \alias{augment.qcc}
 \title{Augment for qcc}
 \usage{
-augment.qcc(x, include_center = TRUE, include_stddev = FALSE, gr_func = I, ...)
+\method{augment}{qcc}(x, include_center = TRUE, include_stddev = FALSE, gr_func = I)
 }
 \arguments{
 \item{x}{a qcc object}
@@ -16,8 +16,6 @@ augment.qcc(x, include_center = TRUE, include_stddev = FALSE, gr_func = I, ...)
 \item{gr_func}{function to apply to group labels, useful for dates or
 numbers. Set this to as.numeric or as.Date when your groups are
 numbers/dates respectively}
-
-\item{...}{}
 }
 \value{
 a dataframe for every row in original data along with control chart
@@ -27,13 +25,11 @@ a dataframe for every row in original data along with control chart
 Augment for qcc
 }
 \examples{
-library(broom)
-
 data("pistonrings", package = 'qcc')
 diameter <- qcc::qcc.groups(pistonrings$diameter, pistonrings$sample)
 qcc_obj <- qcc::qcc(diameter[1:25,], type="xbar")
 augment(qcc_obj)
 
-qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[24:40,], type="xbar")
+qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[26:40,], type="xbar")
 augment(qcc_new)
 }

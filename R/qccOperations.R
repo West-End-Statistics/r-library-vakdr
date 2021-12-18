@@ -6,23 +6,20 @@
 #' @param gr_func function to apply to group labels, useful for dates or
 #'   numbers. Set this to as.numeric or as.Date when your groups are
 #'   numbers/dates respectively
-#' @param ...
-#'
+#' @importFrom generics augment
 #' @return a dataframe for every row in original data along with control chart
 #'   calculations
 #' @export
 #'
 #' @examples
-#' library(broom)
-#'
 #' data("pistonrings", package = 'qcc')
 #' diameter <- qcc::qcc.groups(pistonrings$diameter, pistonrings$sample)
 #' qcc_obj <- qcc::qcc(diameter[1:25,], type="xbar")
 #' augment(qcc_obj)
 #'
-#' qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[24:40,], type="xbar")
+#' qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[26:40,], type="xbar")
 #' augment(qcc_new)
-augment.qcc <- function(x, include_center = TRUE, include_stddev = FALSE, gr_func = I, ...){
+augment.qcc <- function(x, include_center = TRUE, include_stddev = FALSE, gr_func = I){
 
   if(!(x$type %in% c("xbar", "p", "np", "u")))
     warning("Control Chart Type ", x$type, " not directly supported by augment.qcc, use with care!")
@@ -56,7 +53,6 @@ augment.qcc <- function(x, include_center = TRUE, include_stddev = FALSE, gr_fun
   }
 
   all_data <- cbind(all_data, x$limits)
-  all_data
 
   if(include_center) all_data$center <- x$center
   if(include_stddev) all_data$stddev <- x$std.dev
@@ -67,7 +63,8 @@ augment.qcc <- function(x, include_center = TRUE, include_stddev = FALSE, gr_fun
   all_data$violations[x$violations$beyond.limits] <- "Beyond Limits"
 
   # make sure all possibilites are available so that level order is predictable
-  all_data$violations <- factor(all_data$violations, levels = c("None", "Violating Run", "Beyond Limits"))
+  all_data$violations <- factor(all_data$violations,
+                                levels = c("None", "Violating Run", "Beyond Limits"))
 
   all_data$group <- gr_func(all_data$group)
 
@@ -188,8 +185,8 @@ plot_gg.qcc <- function(x, add.stats = TRUE, chart.all = TRUE,
 #' qcc_obj2 <- qcc.formula(diameter ~ sample, data = dplyr::filter(pistonrings, sample <= 25), type = "xbar", plot = TRUE)
 #'
 #' # With Cutoff
-#' qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[24:40,], type="xbar")
-#' qcc_new2 <- qcc.formula(diameter ~ sample, data = pistonrings, type = "xbar", plot = TRUE, cutoff = 25)
+#' qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[26:40,], type="xbar")
+#' qcc_new2 <- qcc.formula(diameter ~ sample, data = pistonrings, type = "xbar", plot = TRUE, cutoff = 26)
 #'
 #' # Dates and p chart
 #' ## use POSIXct, not Date object to create date
@@ -205,6 +202,8 @@ plot_gg.qcc <- function(x, add.stats = TRUE, chart.all = TRUE,
 #' qcc.formula(vals ~ samp_dates, data = d, type = "p", plot = TRUE)
 #' qcc.formula(vals ~ samp_dates, data = d, type = "p", plot = TRUE, cutoff = '2017-01-08')
 qcc.formula <- function(formula, data, type, plot = FALSE, cutoff = NULL, ...){
+  check_package('qcc')
+
   data <- as.data.frame(data)
   outcome_name <- formula.tools::lhs(formula)
   group_name <- formula.tools::rhs(formula)

@@ -5,7 +5,7 @@
 \alias{prob2logodds}
 \alias{odds2prob}
 \alias{logodds2prob}
-\title{Helper functions to convert probabilies and odds}
+\title{Helper functions to convert probabilities and odds}
 \usage{
 prob2odds(p)
 
@@ -26,7 +26,7 @@ logodds2prob(lx)
 a numeric vector
 }
 \description{
-Helper functions to convert probabilies and odds
+Helper functions to convert probabilities and odds
 }
 \section{Functions}{
 \itemize{
@@ -39,4 +39,5 @@ Helper functions to convert probabilies and odds
 
 \examples{
 prob2odds(.5)
+odds2prob(prob2odds(.5))
 }

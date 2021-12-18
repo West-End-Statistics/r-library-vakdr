@@ -54,8 +54,8 @@ qcc_obj <- qcc::qcc(diameter[1:25,], type="xbar")
 qcc_obj2 <- qcc.formula(diameter ~ sample, data = dplyr::filter(pistonrings, sample <= 25), type = "xbar", plot = TRUE)
 
 # With Cutoff
-qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[24:40,], type="xbar")
-qcc_new2 <- qcc.formula(diameter ~ sample, data = pistonrings, type = "xbar", plot = TRUE, cutoff = 25)
+qcc_new <-  qcc::qcc(diameter[1:25,], newdata = diameter[26:40,], type="xbar")
+qcc_new2 <- qcc.formula(diameter ~ sample, data = pistonrings, type = "xbar", plot = TRUE, cutoff = 26)
 
 # Dates and p chart
 ## use POSIXct, not Date object to create date

@@ -1,4 +1,4 @@
-#' Helper functions to convert probabilies and odds
+#' Helper functions to convert probabilities and odds
 #'
 #' @param p a probability
 #' @param x an odds
@@ -8,6 +8,7 @@
 #' @export
 #' @examples
 #' prob2odds(.5)
+#' odds2prob(prob2odds(.5))
 prob2odds <- function(p){
   p/(1-p)
 }
