@@ -1,4 +1,5 @@
-test_that("runLocalScript works",{
+test_that("runLocalScript works", {
+  skip_if_not_installed('sys')
   # create a file to run
   script_to_run <- tempfile(fileext = ".R")
   writeLines("2 + 2", con = script_to_run)
@@ -11,9 +12,4 @@ test_that("runLocalScript works",{
 
   expect_error(runLocalScript("thisisnotafile.R", error_on_missing = TRUE))
   expect_equal(runLocalScript("thisisnotafile.R")$status, 1)
-
-
-}
-
-
-)
+})

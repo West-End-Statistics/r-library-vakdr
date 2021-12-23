@@ -21,6 +21,7 @@ runLocalScript <- function(x,
                            std_err = NULL,
                            std_out = NULL,
                            error_on_missing = FALSE) {
+  check_package('sys')
 
   if(!file.exists(x)){
     err_msg <- paste("File", x, "is missing")
@@ -35,8 +36,6 @@ runLocalScript <- function(x,
         time_taken = NA_real_
       )
       return(output)
-
-
     }
 
   }
@@ -48,8 +47,6 @@ runLocalScript <- function(x,
   if(is.null(std_out)){
     std_out <- tempfile(fileext = '.txt')
   }
-
-
 
   start_time <- Sys.time()
   status <- sys::r_wait(std_in = x,
