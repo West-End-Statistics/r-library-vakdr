@@ -21,7 +21,10 @@
 #'             MEDIAN = median(original),
 #'             SD = sd(original),
 #'             CT = n())
-quantileCut <- function(x, number_breaks = 10, force_unique = TRUE, silent = TRUE, na.rm = FALSE, ...){
+quantileCut <- function(x, number_breaks = 10,
+                        force_unique = TRUE,
+                        silent = TRUE,
+                        na.rm = FALSE, ...){
   breaks <- quantile(x, seq(0,1, length.out = number_breaks + 1), na.rm = na.rm)
   if(force_unique){
     breaks <- unique(breaks)
@@ -31,6 +34,5 @@ quantileCut <- function(x, number_breaks = 10, force_unique = TRUE, silent = TRU
     warning("Only ", length(breaks) - 1, " unique breaks")
   }
 
-  cut(x, breaks = breaks, include.lowest =T, ...)
-
+  cut(x, breaks = breaks, include.lowest = T, ...)
 }
